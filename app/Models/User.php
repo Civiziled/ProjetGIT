@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -44,5 +45,29 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Vérifie si l'utilisateur est un administrateur
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * Vérifie si l'utilisateur est un technicien
+     */
+    public function isTechnician(): bool
+    {
+        return $this->role === 'technicien';
+    }
+
+    /**
+     * Relation avec les interventions assignées
+     */
+    public function assignedInterventions()
+    {
+        return $this->hasMany(Intervention::class, 'assigned_technician_id');
     }
 }
