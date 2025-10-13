@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Route;
 
 // Routes publiques supprimées - redirection vers le dashboard
 Route::get('/', function () {
+    return view('homepage.index');
+})->name('homepage');
+
+
+
+
     return redirect()->route('dashboard');
 });
 
