@@ -13,11 +13,6 @@ Route::get('/', function () {
 })->name('homepage');
 
 
-
-
-    return redirect()->route('dashboard');
-});
-
 // Routes protégées par authentification
 Route::middleware(['auth', 'verified'])->group(function () {
     // Dashboard

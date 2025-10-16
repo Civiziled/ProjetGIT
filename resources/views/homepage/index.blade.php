@@ -1,26 +1,51 @@
+<x-guest-layout>
+<div class="title">
 <h1> Bienvenue à l’Atelier 404 </h1>
     <p> L’Atelier 404 est un espace dédié à la réparation gratuite des équipements informatiques, 
         ouvert au public et géré par nos étudiants en informatique. 
         Notre objectif est de permettre à chacun de donner une seconde vie à ses appareils tout en 
         offrant aux étudiants une expérience pratique encadrée et supervisée par nos techniciens expérimentés. 
     </p>
+</div>
+<div class="service">
+    <h2>Nos services</h2>
 
-<div>
-    <h2> Nos services </h2>
-    <ul>
-        <li>Diagnostic et réparation d’ordinateurs portables et fixes</li>
-        <li>Assistance pour smartphones et tablettes</li>
-        <li>Récupération de données et sauvegarde</li>
-        <li>Installation et mise à jour de logiciels</li>
-        <li>Conseils pour l’entretien et l’optimisation des appareils</li>
-    </ul>
-    <p>Nous accueillons tous les citoyens souhaitant faire réparer leurs équipements dans un cadre convivial et professionnel.</p>
+    <section class="service-grid">
+        <div class="service-item">
+                <i class="ri-computer-line"></i>
+            <p>Diagnostic et réparation d’ordinateurs portables et fixes</p>
+        </div>
+
+        <div class="service-item">
+                <i class="ri-smartphone-line"></i>
+            <p>Assistance pour smartphones et tablettes</p>
+        </div>
+
+        <div class="service-item">
+                <i class="ri-database-2-line"></i>
+            <p>Récupération de données et sauvegarde</p>
+        </div>
+
+        <div class="service-item">
+                <i class="ri-tools-line"></i>
+            <p>Installation et mise à jour de logiciels</p>
+        </div>
+
+        <div class="service-item">
+                <i class="ri-lightbulb-flash-line"></i>
+            <p>Conseils pour l’entretien et l’optimisation des appareils</p>
+        </div>
+    </section>
+
+    <p class='pt-6'>
+        Nous accueillons tous les citoyens souhaitant faire réparer leurs équipements dans un cadre convivial et professionnel.
+    </p>
 </div>
 
-<div>
+<div class='contact-section'>
     <h2>Formulaire de contact</h2>
     <p>Pour prendre rendez-vous ou soumettre une demande de réparation, merci de remplir notre formulaire :</p>
-    <form action ="" method='POST'>
+    <form action ="" method='POST' class='contact-form'>
 
         @csrf
         <div>
@@ -74,10 +99,10 @@
         </div>
     </form>
 </div>
-<div>
+<div class="infos">
     <h2>Informations pratiques</h2>
     <ul>
-        <li>Localisation : Atelier 404, Campus Informatique, [Adresse exacte à compléter]</li>
+        <li>Localisation : Atelier 404, Campus Informatique</li>
         <li>Horaires d’ouverture : Lundi à vendredi, 10h00 – 18h00</li>
         <li> FAQ rapide : 
             <ul>
@@ -89,3 +114,5 @@
     </ul>
     <p>Nous vous invitons à découvrir l’Atelier 404 et à profiter de nos services gratuits, tout en soutenant l’apprentissage pratique de nos étudiants en informatique.</p>
 </div>
+
+</x-guest-layout>
