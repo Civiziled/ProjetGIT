@@ -13,6 +13,12 @@
 @endif
 
 <div class="title">
+    <nav>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+        <a href="#infos">FAQ</a>
+       <a href='{{ route('dashboard') }}'>Profil</a>
+    </nav>
 <h1> Bienvenue à l’Atelier 404 </h1>
     <p> L’Atelier 404 est un espace dédié à la réparation gratuite des équipements informatiques, 
         ouvert au public et géré par nos étudiants en informatique. 
@@ -20,7 +26,7 @@
         offrant aux étudiants une expérience pratique encadrée et supervisée par nos techniciens expérimentés. 
     </p>
 </div>
-<div class="service">
+<div class="service" id="service">
     <h2>Nos services</h2>
 
     <section class="service-grid">
@@ -55,7 +61,7 @@
     </p>
 </div>
 
-<div class='contact-section'>
+<div class='contact-section' id="contact">
     <h2>Formulaire de contact</h2>
     <p>Pour prendre rendez-vous ou soumettre une demande de réparation, merci de remplir notre formulaire :</p>
     <form action ="{{ route('public.store') }}" method='POST' class='contact-form'>
@@ -112,7 +118,7 @@
         </div>
     </form>
 </div>
-<div class="infos">
+<div class="infos" id="infos">
     <h2>Informations pratiques</h2>
     <ul>
         <li>Localisation : Atelier 404, Campus Informatique</li>

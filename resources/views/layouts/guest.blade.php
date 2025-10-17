@@ -21,7 +21,7 @@
                 text-align:center;
                 font-weight:bold;
                 font-size:30px;
-                padding-top:100px;
+                padding-top:200px;
             }
             .title p{
                 text-align:center;
@@ -42,12 +42,40 @@
                 linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
                 url('/storage/images/Motherboard.png');
                 color:white;
-                height:60vh;
+                height:70vh;
                 background-size: cover; 
                 background-position: center;
                 background-repeat: no-repeat;
             }
             
+         nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    display: flex;
+    justify-content: flex-end;
+    gap: 40px;
+    padding: 20px 40px;
+    background-color: rgba(255, 255, 255, 0.75);
+    
+}
+
+
+nav a {
+    color: #003366;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #b9e3ff;
+}
+
+
+
 .service {
     text-align: center;
     padding: 30px 20px;
@@ -217,6 +245,7 @@
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col pt-6 sm:pt-0 bg-gray-100 ">
+           
 
             <main class="w-full bg-white shadow-md overflow-hidden sm:rounded-lg">
                 {{ $slot }}
