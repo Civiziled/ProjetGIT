@@ -15,9 +15,18 @@ Route::get('/', function () {
 
 // Routes protégées par authentification
 Route::middleware(['auth', 'verified'])->group(function () {
-    // Dashboard
+    // Dashboard général (redirection selon le rôle)
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/dashboard/export', [DashboardController::class, 'exportInterventions'])->name('dashboard.export');
+    
+    // Routes spécifiques par rôle
+    Route::middleware(['role:admin'])->group(function () {
+        Route::get('/admin', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
+        Route::get('/admin/export', [DashboardController::class, 'exportInterventions'])->name('admin.export');
+    });
+    
+    Route::middleware(['role:technicien'])->group(function () {
+        Route::get('/technicien', [DashboardController::class, 'technicianDashboard'])->name('technician.dashboard');
+    });
 
     // Gestion des clients
     Route::resource('clients', ClientController::class);

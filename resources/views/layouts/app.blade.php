@@ -26,7 +26,13 @@
                             </a>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <a href="{{ route('dashboard') }}" class="text-gray-600 hover:text-gray-900">Tableau de bord</a>
+                            @auth
+                                @if(auth()->user()->isAdmin())
+                                    <a href="{{ route('admin.dashboard') }}" class="text-gray-600 hover:text-gray-900">Tableau de bord Admin</a>
+                                @else
+                                    <a href="{{ route('technician.dashboard') }}" class="text-gray-600 hover:text-gray-900">Tableau de bord Technicien</a>
+                                @endif
+                            @endauth
                             <a href="{{ route('interventions.index') }}" class="text-gray-600 hover:text-gray-900">Interventions</a>
                             @auth
                                 @if(auth()->user()->isAdmin())

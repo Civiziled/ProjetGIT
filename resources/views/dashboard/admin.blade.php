@@ -184,7 +184,7 @@
             <a href="{{ route('interventions.index') }}" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-300">
                 Voir toutes les interventions
             </a>
-            <a href="{{ route('dashboard.export') }}" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition duration-300">
+            <a href="{{ route('admin.export') }}" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition duration-300">
                 Exporter CSV
             </a>
         </div>
