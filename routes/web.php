@@ -33,5 +33,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
+    //Pour soumettre le formulaire depuis la page principale
+    Route::post('/contact',[PublicController::class,'store'])->name('public.store');
 require __DIR__.'/auth.php';
