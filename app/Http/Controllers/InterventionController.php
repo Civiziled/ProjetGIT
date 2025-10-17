@@ -23,7 +23,10 @@ class InterventionController extends Controller
 
         // Filtrage selon le rôle
         if (Auth::user()->isTechnician()) {
-            $query->assignedTo(Auth::id());
+            $query = $query->where(function($q) {
+                $q->whereNull('assigned_technician_id')
+                ->orWhere('assigned_technician_id', Auth::id());
+          });
         }
 
         // Filtres de recherche
