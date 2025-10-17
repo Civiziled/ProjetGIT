@@ -1,12 +1,12 @@
-<x-guest-layout>
+<x-public-layout>
  @if(session('success'))
-    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+    <div class="alert alert-success">
         {{ session('success') }}
     </div>
 @endif
 
 @if(session('error'))
-    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+    <div class="alert alert-error">
         {{ session('error') }}
     </div>
 @endif
@@ -132,4 +132,4 @@
     <p>Nous vous invitons à découvrir l’Atelier 404 et à profiter de nos services gratuits, tout en soutenant l’apprentissage pratique de nos étudiants en informatique.</p>
 </div>
 
-</x-guest-layout>
+</x-public-layout>
