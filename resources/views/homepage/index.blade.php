@@ -1,6 +1,5 @@
 <x-guest-layout>
-    
-    @if(session('success'))
+ @if(session('success'))
     <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
         {{ session('success') }}
     </div>
@@ -11,7 +10,6 @@
         {{ session('error') }}
     </div>
 @endif
-
 <div class="title">
     <nav>
         <a href="#services">Services</a>
