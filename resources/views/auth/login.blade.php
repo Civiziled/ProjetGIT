@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-app-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-6" :status="session('status')" />
 
@@ -91,4 +91,4 @@
             </div>
         </div>
     </form>
-</x-guest-layout>
+</x-app-layout>
