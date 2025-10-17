@@ -1,4 +1,17 @@
 <x-guest-layout>
+    
+    @if(session('success'))
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+        {{ session('error') }}
+    </div>
+@endif
+
 <div class="title">
 <h1> Bienvenue à l’Atelier 404 </h1>
     <p> L’Atelier 404 est un espace dédié à la réparation gratuite des équipements informatiques, 
@@ -45,7 +58,7 @@
 <div class='contact-section'>
     <h2>Formulaire de contact</h2>
     <p>Pour prendre rendez-vous ou soumettre une demande de réparation, merci de remplir notre formulaire :</p>
-    <form action ="" method='POST' class='contact-form'>
+    <form action ="{{ route('public.store') }}" method='POST' class='contact-form'>
 
         @csrf
         <div>
