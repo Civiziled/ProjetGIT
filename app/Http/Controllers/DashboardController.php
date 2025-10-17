@@ -19,16 +19,16 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         if ($user->isAdmin()) {
-            return $this->adminDashboard();
+            return redirect()->route('admin.dashboard');
         } else {
-            return $this->technicianDashboard();
+            return redirect()->route('technician.dashboard');
         }
     }
 
     /**
      * Tableau de bord administrateur
      */
-    private function adminDashboard()
+    public function adminDashboard()
     {
         // Statistiques générales
         $stats = [
@@ -88,7 +88,7 @@ class DashboardController extends Controller
     /**
      * Tableau de bord technicien
      */
-    private function technicianDashboard()
+    public function technicianDashboard()
     {
         $technicianId = Auth::id();
 
