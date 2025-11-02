@@ -50,6 +50,8 @@
                                 @if(auth()->user()->isAdmin())
                                     <a href="{{ route('clients.index') }}" class="text-gray-600 hover:text-gray-900">Clients</a>
                     </a>
+                    @endif
+                    @endauth
                     <h1 class="text-3xl font-bold text-gray-900 mb-2 fade-in-delay-1">Atelier 404</h1>
                     <p class="text-gray-600 fade-in-delay-2">Système de gestion des interventions</p>
                 </div>
