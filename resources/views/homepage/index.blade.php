@@ -1,15 +1,4 @@
 <x-public-layout>
- @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-
-@if(session('error'))
-    <div class="alert alert-error">
-        {{ session('error') }}
-    </div>
-@endif
 <div class="title">
     <nav>
         <a href="#services">Services</a>
@@ -116,6 +105,17 @@
         </div>
     </form>
 </div>
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-error">
+        {{ session('error') }}
+    </div>
+@endif
 <div class="infos" id="infos">
     <h2>Informations pratiques</h2>
     <ul>
