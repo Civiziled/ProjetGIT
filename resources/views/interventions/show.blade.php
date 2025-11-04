@@ -81,6 +81,35 @@
                 @endif
             </div>
 
+            <!-- Historique des modifications -->
+            <div class="bg-white rounded-lg shadow p-6 mt-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Historique des modifications</h3>
+
+                @php
+                    $history = DB::table('intervention_history')
+                        ->where('intervention_id', $intervention->id)
+                        ->orderByDesc('date_modification')
+                        ->get();
+                @endphp
+                                                    
+                @if($history->isEmpty())
+                    <p class="text-sm text-gray-500">Aucune modification enregistrée pour cette intervention.</p>
+                @else
+                    <ul class="divide-y divide-gray-200">
+                        @foreach($history as $event)
+                            <li class="py-2">
+                                <p class="text-sm text-gray-900">
+                                    <strong>{{ $event->utilisateur }}</strong> — {{ $event->action }}
+                                </p>
+                                <p class="text-xs text-gray-500">
+                                    {{ \Carbon\Carbon::parse($event->date_modification)->format('d/m/Y H:i') }}
+                                </p>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
+            </div>
+
             <!-- Images -->
             @if($intervention->images->count() > 0)
                 <div class="bg-white rounded-lg shadow p-6">
