@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
+use App\Services\InterventionNotificationService;
 
 class InterventionController extends Controller
 {
@@ -100,6 +101,8 @@ class InterventionController extends Controller
             $this->handleImageUpload($request->file('images'), $intervention);
         }
 
+        InterventionNotificationService::notifyCreation($intervention, Auth::user());
+
         return redirect()->route('interventions.show', $intervention)
                         ->with('success', 'Intervention créée avec succès.');
     }
@@ -148,11 +151,23 @@ class InterventionController extends Controller
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120'
         ]);
 
+        $originalStatus = $intervention->status;
+        $originalTechnician = $intervention->assigned_technician_id;
+
         $intervention->update($validated);
+        $intervention->load(['client', 'assignedTechnician']);
 
         // Gestion des nouvelles images
         if ($request->hasFile('images')) {
             $this->handleImageUpload($request->file('images'), $intervention);
+        }
+
+        if ($originalStatus !== $intervention->status) {
+            InterventionNotificationService::notifyStatusChange($intervention, $originalStatus, Auth::user());
+        }
+
+        if ($originalTechnician !== $intervention->assigned_technician_id && $intervention->assignedTechnician) {
+            InterventionNotificationService::notifyAssignment($intervention, Auth::user());
         }
 
         return redirect()->route('interventions.show', $intervention)
@@ -191,6 +206,9 @@ class InterventionController extends Controller
         ]);
 
         $intervention->update($validated);
+        $intervention->load(['client', 'assignedTechnician']);
+
+        InterventionNotificationService::notifyAssignment($intervention, Auth::user());
 
         return redirect()->route('interventions.show', $intervention)
                         ->with('success', 'Intervention assignée avec succès.');
@@ -264,7 +282,7 @@ class InterventionController extends Controller
         Storage::disk('public')->makeDirectory(dirname($thumbnailPath));
 
         // Redimensionner l'image (150x150)
-        $img = \Intervention\Image\Facades\Image::make($image);
+        $img = \Intervention\Image\Laravel\Facades\Image::make($image);
         $img->resize(150, 150, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
