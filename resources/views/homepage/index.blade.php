@@ -116,20 +116,41 @@
         </div>
     </form>
 </div>
+
 <div class="infos" id="infos">
     <h2>Informations pratiques</h2>
     <ul>
-        <li>Localisation : Atelier 404, Campus Informatique</li>
-        <li>Horaires d’ouverture : Lundi à vendredi, 10h00 – 18h00</li>
-        <li> FAQ rapide : 
+        <li><strong>Localisation :</strong> Atelier 404, Campus Informatique</li>
+        <li><strong>Horaires d’ouverture :</strong> Lundi à vendredi, 10h00 – 18h00</li>
+        <li>
+            <strong>FAQ rapide :</strong>
             <ul>
-                <li>Puis-je apporter plusieurs appareils ? Oui, mais chaque appareil doit être soumis individuellement.</li>
-                <li>Faut-il prendre rendez-vous ? Le formulaire en ligne suffit pour enregistrer votre intervention.</li>
-                <li>Combien de temps dure une réparation ? Cela dépend du problème, mais un suivi est toujours assuré.</li>
+                <li>
+                    <details>
+                        <summary>Puis-je apporter plusieurs appareils ?</summary>
+                        <p>Oui, mais chaque appareil doit être soumis individuellement.</p>
+                    </details>
+                </li>
+                <li>
+                    <details>
+                        <summary>Faut-il prendre rendez-vous ?</summary>
+                        <p>Le formulaire en ligne suffit pour enregistrer votre intervention.</p>
+                    </details>
+                </li>
+                <li>
+                    <details>
+                        <summary>Combien de temps dure une réparation ?</summary>
+                        <p>Cela dépend du problème, mais un suivi est toujours assuré.</p>
+                    </details>
+                </li>
             </ul>
         </li>
     </ul>
-    <p>Nous vous invitons à découvrir l’Atelier 404 et à profiter de nos services gratuits, tout en soutenant l’apprentissage pratique de nos étudiants en informatique.</p>
+
+    <p>
+        Nous vous invitons à découvrir l’Atelier 404 et à profiter de nos services gratuits,
+        tout en soutenant l’apprentissage pratique de nos étudiants en informatique.
+    </p>
 </div>
 
 </x-guest-layout>

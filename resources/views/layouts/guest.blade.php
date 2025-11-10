@@ -178,35 +178,92 @@ nav a:hover {
     background-color: #f9fafb;
     padding: 40px 30px;
     border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    line-height: 1.6;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    line-height: 1.7;
     color: #333;
+    max-width: 800px; 
+    margin: 40px auto; 
+    text-align: left;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.infos:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.infos h2 {
+    margin-top:0;
+    margin-bottom:15px;
 }
 
 .infos ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 .infos > ul > li {
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     font-weight: 500;
+    font-size: 1.05rem;
 }
 
 .infos ul ul {
     margin-top: 10px;
-    margin-left: 20px;
-    list-style-type: disc;
+    margin-left: 25px;
+    list-style-type: none;
     color: #444;
     font-weight: 400;
+    font-size: 0.95rem;
 }
 
 .infos p {
-    margin-top: 20px;
+    margin-top: 25px;
     text-align: center;
     color: #222;
     font-size: 1rem;
+    font-style: italic;
 }
+
+details {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+details:hover {
+    background-color: #f0f4fa;
+}
+
+summary {
+    font-weight: 600;
+    color: #1a3e75;
+    list-style: none;
+}
+
+summary::-webkit-details-marker {
+    display: none; 
+}
+
+details[open] {
+    background-color: #f9fafb;
+    border-color: #c9d7e3;
+}
+
+details p {
+    margin-top: 10px;
+    color: #333;
+    font-weight: 400;
+    font-size: 0.95rem;
+}
+
+
+
 .footer {
     background-color: #1e3a8a; /* глубокий синий */
     color: #f1f5f9;
