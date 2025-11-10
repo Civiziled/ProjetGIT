@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Intervention;
+use App\Services\InterventionNotificationService;
 
 class PublicController extends Controller
 {
@@ -36,7 +37,8 @@ class PublicController extends Controller
         'status' => 'nouvelle_demande', // statut initial
         'priority' => 'medium',
     ]);
-    // Notification::send(User::where('role', 'admin')->get(), new NewInterventionNotification($intervention));
+
+    InterventionNotificationService::notifyCreation($intervention);
 
     return redirect()->back()->with('success', 'Votre demande a été envoyée avec succès !');
 }

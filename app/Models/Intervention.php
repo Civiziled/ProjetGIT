@@ -87,4 +87,9 @@ class Intervention extends Model
     {
         return $query->where('priority', $priority);
     }
+
+    public function history()
+{
+    return $this->hasMany(InterventionHistory::class)->orderBy('date_modification', 'desc');
+}
 }
