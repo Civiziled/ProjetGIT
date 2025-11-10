@@ -75,7 +75,7 @@
                         
                         <!-- Contenu du formulaire -->
                         <div class="px-6 py-8">
-                            @yield('content')
+                            {{ $slot }}
                         </div>
                     </div>
                     
