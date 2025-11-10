@@ -26,11 +26,11 @@
                             </a>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <a href="{{ route('dashboard') }}" class="text-gray-600 hover:text-gray-900">Tableau de bord</a>
-                            <a href="{{ route('interventions.index') }}" class="text-gray-600 hover:text-gray-900">Interventions</a>
+                            <a href="{{ route('dashboard') }}" class="text-gray-600 hover:text-gray-900 {{ request()->routeIs('dashboard') || request()->routeIs('admin.dashboard') || request()->routeIs('technician.dashboard') ? 'font-bold' : '' }}">Tableau de bord</a>
+                            <a href="{{ route('interventions.index') }}" class="text-gray-600 hover:text-gray-900 {{ request()->routeIs('interventions.*') ? 'font-bold' : '' }}">Interventions</a>
                             @auth
                                 @if(auth()->user()->isAdmin())
-                                    <a href="{{ route('clients.index') }}" class="text-gray-600 hover:text-gray-900">Clients</a>
+                                    <a href="{{ route('clients.index') }}" class="text-gray-600 hover:text-gray-900 {{ request()->routeIs('clients.*') ? 'font-bold' : '' }}">Clients</a>
                                 @endif
                             @endauth
                             
