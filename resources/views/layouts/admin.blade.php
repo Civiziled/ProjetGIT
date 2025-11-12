@@ -31,6 +31,7 @@
                             @auth
                                 @if(auth()->user()->isAdmin())
                                     <a href="{{ route('clients.index') }}" class="text-gray-600 hover:text-gray-900 {{ request()->routeIs('clients.*') ? 'font-extrabold' : '' }}">Clients</a>
+                                     <a href="{{ route('techniciens.index') }}" class="text-gray-600 hover:text-gray-900 {{ request()->routeIs('techniciens.*') ? 'font-extrabold' : '' }}">Tehniciens</a>
                                 @endif
                             @endauth
                             

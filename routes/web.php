@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\InterventionController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\TechnicienController;
 use Illuminate\Support\Facades\Route;
 
 // Routes publiques supprimées - redirection vers le dashboard
@@ -45,3 +46,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Pour soumettre le formulaire depuis la page principale
     Route::post('/contact',[PublicController::class,'store'])->name('public.store');
 require __DIR__.'/auth.php';
+
+
+   Route::resource('techniciens', TechnicienController::class);
