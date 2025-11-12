@@ -129,9 +129,13 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                     <div class="flex space-x-2">
-                                        <a href="{{ route('interventions.show', $intervention) }}" class="text-blue-600 hover:text-blue-900">
+                                        <!--<a href="{{ route('interventions.show', $intervention) }}" class="text-blue-600 hover:text-blue-900">
+                                            Voir
+                                        </a>-->
+                                         <a href="{{ route('interventions.show', ['intervention' => $intervention->id, 'from' => 'interventions']) }}" class="text-blue-600 hover:text-blue-900">
                                             Voir
                                         </a>
+
                                         @can('update', $intervention)
                                             <a href="{{ route('interventions.edit', $intervention) }}" class="text-green-600 hover:text-green-900">
                                                 Modifier

@@ -111,13 +111,17 @@ class InterventionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Intervention $intervention)
+    public function show(Intervention $intervention, Request $request)
     {
         Gate::authorize('view', $intervention);
 
         $intervention->load(['client', 'assignedTechnician', 'images']);
 
-        return view('interventions.show', compact('intervention'));
+        $from = $request->query('from', 'interventions');
+
+        return view('interventions.show', compact('intervention', 'from'));
+
+        //return view('interventions.show', compact('intervention'));
     }
 
     /**

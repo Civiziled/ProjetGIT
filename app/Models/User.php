@@ -70,4 +70,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Intervention::class, 'assigned_technician_id');
     }
+
+    public function interventions()
+{
+    return $this->hasMany(Intervention::class, 'assigned_technician_id'); // замените 'technicien_id' на правильное поле
+}
 }

@@ -9,13 +9,26 @@
             </div>
             <div class="flex space-x-3">
                 @can('update', $intervention)
-                    <a href="{{ route('interventions.edit', $intervention) }}" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300">
+                    <a href="{{ route('interventions.edit', $intervention) }}" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300 w-70 h-10 mt-8">
                         Modifier
                     </a>
                 @endcan
-                <a href="{{ route('interventions.index') }}" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-300">
+                <!--<a href="{{route('interventions.index') }}" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-300">
                     Retour à la liste
-                </a>
+                </a>-->
+                <div class="mt-8 flex items-center justify-center">
+    @if ($from === 'technicien')
+        <a href="{{ route('techniciens.show', $intervention->assignedTechnician->id) }}"
+           class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-300">
+           Retour au profil du technicien
+        </a>
+    @else
+        <a href="{{ route('interventions.index') }}"
+           class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-300 ">
+           Retour à la liste des interventions
+        </a>
+    @endif
+</div>
             </div>
         </div>
     </div>
@@ -86,7 +99,7 @@
                 <h3 class="text-lg font-semibold text-gray-900 mb-4">Historique des modifications</h3>
 
                 @php
-                    $history = DB::table('intervention_history')
+                    $history = DB::table('interventions')
                         ->where('intervention_id', $intervention->id)
                         ->orderByDesc('date_modification')
                         ->get();
@@ -260,4 +273,5 @@
             </div>
         </div>
     </div>
+
 @endsection
