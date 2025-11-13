@@ -23,7 +23,7 @@ class InterventionAssignedMail extends Mailable
     public function build(): self
     {
         return $this
-            ->subject($this->buildSubject())
+            ->subject($this->getSubject())
             ->markdown('emails.interventions.assigned', [
                 'intervention' => $this->intervention,
                 'recipientType' => $this->recipientType,
@@ -31,7 +31,7 @@ class InterventionAssignedMail extends Mailable
             ]);
     }
 
-    protected function buildSubject(): string
+    protected function getSubject(): string
     {
         return match ($this->recipientType) {
             'technician' => 'Nouvelle intervention assignée',

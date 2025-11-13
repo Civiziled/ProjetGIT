@@ -23,7 +23,7 @@ class InterventionCreatedMail extends Mailable
     public function build(): self
     {
         return $this
-            ->subject($this->buildSubject())
+            ->subject($this->getSubject())
             ->markdown('emails.interventions.created', [
                 'intervention' => $this->intervention,
                 'recipientType' => $this->recipientType,
@@ -31,7 +31,7 @@ class InterventionCreatedMail extends Mailable
             ]);
     }
 
-    protected function buildSubject(): string
+    protected function getSubject(): string
     {
         return match ($this->recipientType) {
             'client' => 'Nouvelle intervention créée',
