@@ -24,7 +24,7 @@ class InterventionStatusUpdatedMail extends Mailable
     public function build(): self
     {
         return $this
-            ->subject($this->buildSubject())
+            ->subject($this->getSubject())
             ->markdown('emails.interventions.status_updated', [
                 'intervention' => $this->intervention,
                 'previousStatusLabel' => $this->statusLabel($this->previousStatus),
@@ -34,7 +34,7 @@ class InterventionStatusUpdatedMail extends Mailable
             ]);
     }
 
-    protected function buildSubject(): string
+    protected function getSubject(): string
     {
         return match ($this->recipientType) {
             'client' => 'Mise à jour de votre intervention',

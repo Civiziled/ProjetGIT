@@ -153,6 +153,10 @@ class InterventionController extends Controller
         'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
     ]);
 
+    // Capturer les valeurs originales AVANT la mise à jour
+    $originalStatus = $intervention->status;
+    $originalTechnician = $intervention->assigned_technician_id;
+
     // Préserver les anciennes valeurs de l'histoire
     $oldValues = $intervention->only([
         'status', 'assigned_technician_id', 'description', 'device_type', 'priority', 'scheduled_date', 'internal_notes'
@@ -161,10 +165,7 @@ class InterventionController extends Controller
     // Nom d'utilisateur pour l'historique
     $userName = auth()->user()->name ?? 'Utilisateur inconnu';
 
-    // Mise à jour des champs d'intervention
-    $intervention->update($validated);
-
-    // Traitement de nouvelles images
+    // Traitement de nouvelles images AVANT la mise à jour
     if ($request->hasFile('images')) {
         foreach ($request->file('images') as $imageFile) {
             $filename = $imageFile->getClientOriginalName();
@@ -180,11 +181,6 @@ class InterventionController extends Controller
                 'mime_type' => $mimeType,
             ]);
 
-        $originalStatus = $intervention->status;
-        $originalTechnician = $intervention->assigned_technician_id;
-
-        $intervention->update($validated);
-        $intervention->load(['client', 'assignedTechnician']);
             // Image ajoutant un historique
             \DB::table('intervention_history')->insert([
                 'intervention_id' => $intervention->id,
@@ -195,7 +191,11 @@ class InterventionController extends Controller
         }
     }
 
-    // Nous enregistrons l'historique des modifications apportées aux champs restants.
+    // Mise à jour des champs d'intervention (une seule fois)
+    $intervention->update($validated);
+    $intervention->load(['client', 'assignedTechnician']);
+
+    // Enregistrer l'historique des modifications apportées aux champs
     $changes = [];
     foreach ($validated as $field => $newValue) {
         // Sauter les images
@@ -203,16 +203,6 @@ class InterventionController extends Controller
             continue;
         }
 
-        if ($originalStatus !== $intervention->status) {
-            InterventionNotificationService::notifyStatusChange($intervention, $originalStatus, Auth::user());
-        }
-
-        if ($originalTechnician !== $intervention->assigned_technician_id && $intervention->assignedTechnician) {
-            InterventionNotificationService::notifyAssignment($intervention, Auth::user());
-        }
-
-        return redirect()->route('interventions.show', $intervention)
-                        ->with('success', 'Intervention mise à jour avec succès.');
         $oldValue = $oldValues[$field] ?? null;
 
         // Pour le rendez-vous
@@ -234,7 +224,7 @@ class InterventionController extends Controller
         }
     }
 
-    // Nous insérons toutes les modifications dans la table d'historique
+    // Insérer toutes les modifications dans la table d'historique
     foreach ($changes as $change) {
         \DB::table('intervention_history')->insert([
             'intervention_id' => $intervention->id,
@@ -242,6 +232,15 @@ class InterventionController extends Controller
             'action' => $change,
             'date_modification' => now(),
         ]);
+    }
+
+    // Envoyer les notifications si nécessaire
+    if ($originalStatus !== $intervention->status) {
+        InterventionNotificationService::notifyStatusChange($intervention, $originalStatus, Auth::user());
+    }
+
+    if ($originalTechnician !== $intervention->assigned_technician_id && $intervention->assignedTechnician) {
+        InterventionNotificationService::notifyAssignment($intervention, Auth::user());
     }
 
     return redirect()->route('interventions.show', $intervention)
