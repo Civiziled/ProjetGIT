@@ -99,7 +99,7 @@
                 <h3 class="text-lg font-semibold text-gray-900 mb-4">Historique des modifications</h3>
 
                 @php
-                    $history = DB::table('interventions')
+                    $history = DB::table('intervention_history')
                         ->where('intervention_id', $intervention->id)
                         ->orderByDesc('date_modification')
                         ->get();

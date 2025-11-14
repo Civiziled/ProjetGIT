@@ -118,8 +118,12 @@ class InterventionController extends Controller
         $intervention->load(['client', 'assignedTechnician', 'images']);
 
         $from = $request->query('from', 'interventions');
+        $history = \DB::table('intervention_history')
+                    ->where('intervention_id', $intervention->id)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
 
-        return view('interventions.show', compact('intervention', 'from'));
+        return view('interventions.show', compact('intervention', 'from', 'history'));
 
         //return view('interventions.show', compact('intervention'));
     }
