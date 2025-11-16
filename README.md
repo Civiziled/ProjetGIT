@@ -9,7 +9,7 @@
 
 **Une solution complète de gestion d'interventions pour repair café étudiant**
 
-[🚀 Installation](#-installation-rapide) • [📋 Fonctionnalités](#-fonctionnalités) • [🏗️ Architecture](#️-architecture-technique) • [🧪 Tests](#-tests-automatisés)
+[🚀 Installation](#-installation-rapide) • [📊 Diagramme UML](#-diagramme-uml) • [📦 Livrables](#-livrables) • [🧪 Tests](#-tests-automatisés)
 
 </div>
 
@@ -30,6 +30,245 @@
 
 ---
 
+## 📊 Diagramme UML
+
+### Modèle de Données
+
+Le système est modélisé avec les classes suivantes :
+
+#### 1. **role** (Énumération)
+- **Attributs :**
+  - `+admin`
+  - `+technicien`
+
+#### 2. **Clients**
+- **Attributs :**
+  - `+id: int`
+  - `+nom: string`
+  - `+email: string`
+  - `+adresse: string`
+  - `+telephone: string`
+  - `+created_at: datetime`
+  - `+updated_at: datetime`
+- **Opérations :**
+  - `+historiqueIntervention(): list<intervention>`
+  - `+filtrerIntervention(): filtrer<intervention>`
+
+#### 3. **User**
+- **Attributs :**
+  - `+id: int`
+  - `+nom: string`
+  - `+email: string`
+  - `+mot_de_passe: string`
+  - `+role: role`
+  - `+created_at: datetime`
+  - `+updated_at: datetime`
+- **Opérations :**
+  - `+assignerintervention()`
+  - `+VoirsesInterventions()`
+
+#### 4. **Priorité** (Énumération)
+- **Attributs :**
+  - `+Basse` (Low)
+  - `+Moyenne` (Medium)
+  - `+Haute` (High)
+  - `+Urgente` (Urgent)
+
+#### 5. **Status_Intervention** (Énumération)
+- **Attributs :**
+  - `+nouvelle_demande`
+  - `+diagnostic`
+  - `+en_reparation`
+  - `+termine`
+  - `+non_reparable`
+
+#### 6. **Intervention**
+- **Attributs :**
+  - `+id: int`
+  - `+client_id: int` (FK vers Clients)
+  - `+technicien_id: int` (FK vers User)
+  - `+type_appareil: string`
+  - `+description_probleme: text`
+  - `+statut: status_intervention`
+  - `+priorité: priorité`
+  - `+date_prévu: date`
+  - `+created_at: date`
+- **Opérations :**
+  - `+interventionImage()`
+  - `+i()`
+
+#### 7. **Contact**
+- **Attributs :**
+  - `+nom: string`
+  - `+email: string`
+  - `+telephone: string`
+  - `+type_appareil: string`
+  - `+description_probleme: text`
+- **Opérations :**
+  - `+validerFormulaire()`
+  - `+créerClientEtIntervention()`
+
+### Relations
+
+- **User** → **role** : Un utilisateur a un rôle (admin ou technicien)
+- **Intervention** → **Clients** : Une intervention appartient à un client (via `client_id`)
+- **Intervention** → **User** : Une intervention est assignée à un technicien (via `technicien_id`)
+- **Intervention** → **Status_Intervention** : Une intervention a un statut
+- **Intervention** → **Priorité** : Une intervention a une priorité
+
+### Diagramme UML
+
+Le diagramme UML complet est disponible dans le repository :
+- **Format** : PDF ou Image (voir section [Livrables](#-livrables))
+- **Contenu** : Diagramme de classes complet avec toutes les relations et énumérations
+
+---
+
+## 📦 Livrables
+
+Ce repository GitHub contient tous les éléments suivants :
+
+### ✅ 1. Code Source Complet
+
+Le code source complet de l'application Laravel est disponible dans ce repository :
+
+**Structure principale :**
+```
+ProjetGIT/
+├── app/
+│   ├── Http/Controllers/      # Contrôleurs (Intervention, Client, Dashboard, etc.)
+│   ├── Models/                 # Modèles Eloquent (User, Client, Intervention, etc.)
+│   ├── Policies/               # Policies d'autorisation
+│   ├── Services/               # Services métier
+│   └── Mail/                   # Classes Mail (notifications)
+├── database/
+│   ├── migrations/             # Migrations de base de données
+│   └── seeders/                # Seeders pour données de démonstration
+├── resources/views/            # Vues Blade
+├── routes/                     # Routes web et authentification
+├── tests/
+│   ├── Browser/                # Tests Dusk
+│   ├── Feature/                # Tests de fonctionnalités
+│   └── Unit/                   # Tests unitaires
+└── .env.example                # Configuration d'environnement
+```
+
+### ✅ 2. Diagramme UML (Format PDF ou Image)
+
+Le diagramme UML complet est disponible en format :
+- **PDF** : `diagramme_uml.pdf` (à générer)
+- **Image** : `diagramme_uml.png` (à générer)
+
+**Pour générer le diagramme depuis le code Mermaid :**
+
+```bash
+# Installation de Mermaid CLI
+npm install -g @mermaid-js/mermaid-cli
+
+# Génération en PDF
+mmdc -i diagramme.mmd -o diagramme_uml.pdf
+
+# Génération en PNG
+mmdc -i diagramme.mmd -o diagramme_uml.png
+```
+
+**Ou utiliser Mermaid Live Editor :** [https://mermaid.live](https://mermaid.live)
+
+Le diagramme inclut :
+- Toutes les classes (role, Clients, User, Priorité, Status_Intervention, Intervention, Contact)
+- Tous les attributs et opérations
+- Toutes les relations entre les classes
+- Les énumérations (role, Priorité, Status_Intervention)
+
+### ✅ 3. Suite de Tests Dusk Fonctionnels
+
+Tests Dusk complets disponibles dans `tests/Browser/` :
+
+1. **`AdminDashboardTest.php`**
+   - Test de connexion admin
+   - Test d'affichage du dashboard
+   - Test de gestion des interventions
+   - Test de création d'intervention
+   - Test de gestion des clients
+   - Test d'export CSV
+
+2. **`TechnicianDashboardTest.php`**
+   - Test de connexion technicien
+   - Test d'affichage du dashboard
+   - Test de visualisation des interventions assignées
+   - Test de modification d'intervention
+   - Test de changement de statut
+   - Test des restrictions d'accès
+
+3. **`PublicContactTest.php`**
+   - Test du formulaire de contact public
+   - Test de création automatique client/intervention
+
+4. **`ImageUploadTest.php`**
+   - Test d'upload d'images
+   - Test d'affichage et suppression
+
+5. **`SearchAndFilterTest.php`**
+   - Test de recherche et filtrage
+
+**Exécution des tests :**
+```bash
+# Tests Dusk (nécessite ChromeDriver)
+php artisan dusk
+
+# Tests unitaires
+php artisan test
+```
+
+### ✅ 4. Fichier .env.example Configuré
+
+Le fichier `.env.example` est présent à la racine avec toutes les variables d'environnement nécessaires :
+
+- Configuration de l'application (APP_NAME, APP_ENV, APP_DEBUG, etc.)
+- Configuration de la base de données (SQLite par défaut, options MySQL/PostgreSQL)
+- Configuration mail (SMTP ou log)
+- Configuration session et cache
+- Configuration filesystem
+- Variables d'environnement complètes
+
+**Utilisation :**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+### ✅ 5. Seeders pour Données de Démonstration
+
+Seeders complets disponibles dans `database/seeders/` :
+
+1. **`UserSeeder.php`**
+   - Crée 1 administrateur : `admin@atelier404.com` / `password`
+   - Crée 4 techniciens avec des comptes de démonstration
+
+2. **`ClientSeeder.php`**
+   - Crée 8 clients avec données complètes (nom, email, téléphone, adresse)
+
+3. **`InterventionSeeder.php`**
+   - Crée 8 interventions avec différents statuts
+   - Différentes priorités (Basse, Moyenne, Haute, Urgente)
+   - Différents types d'appareils
+   - Assignations aux techniciens
+
+**Exécution des seeders :**
+```bash
+# Exécuter tous les seeders
+php artisan db:seed
+
+# Ou réinitialiser et réexécuter
+php artisan migrate:fresh --seed
+```
+
+**Comptes de démonstration :**
+- **Admin** : `admin@atelier404.com` / `password`
+- **Techniciens** : `marie.dubois@atelier404.com` / `password`
+
+---
+
 ## 🚀 Installation Rapide
 
 ### Prérequis
@@ -40,7 +279,7 @@
 
 ### Installation
 ```bash
-# Cloner le projet
+# Cloner le repository
 git clone [url-du-repo]
 cd ProjetGIT
 
@@ -53,6 +292,7 @@ cp .env.example .env
 php artisan key:generate
 
 # Base de données
+touch database/database.sqlite  # Pour SQLite
 php artisan migrate
 php artisan db:seed
 php artisan storage:link
@@ -64,9 +304,7 @@ npm run build
 php artisan serve
 ```
 
-### 🔑 Comptes de Démonstration
-- **Admin** : `admin@atelier404.com` / `password`
-- **Technicien** : `marie.dubois@atelier404.com` / `password`
+Accéder à l'application : `http://localhost:8000`
 
 ---
 
@@ -75,14 +313,12 @@ php artisan serve
 ### 🏠 Page d'Accueil Publique
 - Formulaire de contact avec validation
 - Création automatique de client et intervention
-- Informations sur l'Atelier 404
 - Design responsive et moderne
 
 ### 👥 Gestion des Utilisateurs
 - **Authentification** : Laravel Breeze
 - **Rôles** : Admin et Technicien
 - **Permissions** : Gates/Policies pour la sécurité
-- **Protection** : Routes sécurisées par rôle
 
 ### 👤 Gestion des Clients
 - **CRUD complet** pour les clients
@@ -93,7 +329,7 @@ php artisan serve
 ### 🔧 Gestion des Interventions
 - **CRUD complet** avec assignation aux techniciens
 - **Statuts** : Nouvelle demande → Diagnostic → En réparation → Terminé → Non réparable
-- **Priorités** : Faible, Moyenne, Élevée, Urgente
+- **Priorités** : Basse, Moyenne, Haute, Urgente
 - **Upload multiple** d'images avec thumbnails
 - **Notes internes** pour les techniciens
 - **Recherche et filtrage** avancés
@@ -102,13 +338,6 @@ php artisan serve
 - **Admin** : Vue globale, statistiques, interventions non assignées
 - **Technicien** : Interventions assignées uniquement
 - **Export CSV** des interventions (admin)
-- **Actions rapides** contextuelles
-
-### 📁 Gestion des Fichiers
-- **Upload d'images** (max 5MB, formats JPG/PNG/GIF)
-- **Génération automatique** de thumbnails
-- **Stockage sécurisé** dans le storage public
-- **Suppression** des fichiers associés
 
 ---
 
@@ -225,19 +454,6 @@ php artisan test
 
 ---
 
-## 🎨 Interface Utilisateur
-
-L'application propose une interface moderne et intuitive avec :
-
-- **Design responsive** adapté à tous les écrans
-- **Navigation claire** avec menus contextuels
-- **Formulaires optimisés** avec validation en temps réel
-- **Tableaux interactifs** avec recherche et filtrage
-- **Upload d'images** avec aperçu immédiat
-- **Notifications** pour les actions importantes
-
----
-
 ## 🚀 Déploiement
 
 ### Production
@@ -257,15 +473,6 @@ php artisan config:cache
 php artisan route:cache
 php artisan view:cache
 ```
-
----
-
-## 📚 Documentation
-
-- [Guide d'installation détaillé](README_INSTALLATION.md)
-- [Schéma de base de données](database_schema.md)
-- [Diagramme UML](uml_diagram.md)
-- [Résumé complet du projet](PROJET_SUMMARY.md)
 
 ---
 
