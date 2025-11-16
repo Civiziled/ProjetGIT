@@ -495,3 +495,4 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 *Une solution complète de gestion d'interventions pour repair café étudiant*
 
 </div>
+<img width="1386" height="1200" alt="Main" src="https://github.com/user-attachments/assets/730d7125-c71d-43ec-a558-95e0c8cb5f29" />
